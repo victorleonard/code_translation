@@ -1,0 +1,12 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: 'API Documentation'
+            description: 'Custom API Documentation'
+            version: '1.0.0'
+        # Vous pouvez ajouter plus de configurations ici selon vos besoins
+    areas:
+        # Activer la documentation pour l'ensemble des API (API Platform incluse)
+        default:
+            path_patterns:
+                - ^/api  # Sélectionne toutes les routes commençant par "/api"
