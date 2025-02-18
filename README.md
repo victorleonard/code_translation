@@ -66,14 +66,14 @@ const DOMAINS = [
 
 ## 4. Ajouter un domaine
 Executer la commande
-'''php 
+```php 
 php scripts/generate_translation_entity.php
-'''
+```
 Puis créez une migration de la table : 
-'''php 
+```php 
 php bin/console make:migration
 php bin/console doctrine:migrations:migrate
-'''
+```
 
 ## 5. Ajouter une traduction
 
