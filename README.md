@@ -18,14 +18,20 @@
    composer install
    ```
 3. Configurez le fichier `.env` :
-   - Configurez les informations de connexion à la base de données.
+   Configurez les informations de connexion à la base de données.
+   DATABASE_URL="postgresql://username:password@127.0.0.1:5432/nom_de_la_base"
 
-4. Lancez les migrations pour créer les tables :
+4. Création de la base de donnée :
    ```bash
-   symfony console doctrine:migrations:migrate
+   php bin/console doctrine:database:create
    ```
 
-5. Démarrez le serveur Symfony :
+5. Lancez les migrations pour créer les tables :
+   ```bash
+   php bin/console doctrine:migrations:migrate
+   ```
+
+6. Démarrez le serveur Symfony :
    ```bash
    symfony server:start
    ```
@@ -113,4 +119,3 @@ GET `/api/translate?domain=hotel&code=DELUXE&category=ROOM_TYPE`
 - **`src/Service`** : Contient les services comme `CodeTranslator`.
 - **`src/Controller`** : Contient les contrôleurs pour les endpoints personnalisés.
 - **`src/Config`** : Contient la configuration des domaines supportés (`SupportedDomains`).
-- **`tests/`** : Contient les tests unitaires et fonctionnels.
