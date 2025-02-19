@@ -5,13 +5,12 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\HotelTranslationsRepository;
 use Doctrine\DBAL\Types\Types;
-use App\Entity\TranslatableInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity(repositoryClass: HotelTranslationsRepository::class)]
 #[ApiResource]
-class HotelTranslations implements TranslatableInterface
+class HotelTranslations
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

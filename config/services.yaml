@@ -30,15 +30,5 @@ services:
     App\Service\CodeTranslator:
         arguments:
             $entityManager: '@doctrine.orm.entity_manager'
-
-    
-    App\DataProvider\GenericTranslationDataProvider:
-        decorates: 'api_platform.doctrine.orm.state.item_provider'
-        arguments:
-            $decorated: '@App\DataProvider\GenericTranslationDataProvider.inner'
-            $codeTranslator: '@App\Service\CodeTranslator'
-        autowire: true
-        autoconfigure: false
-
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

@@ -5,7 +5,6 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\AirlineTranslationsRepository;
 use Doctrine\DBAL\Types\Types;
-use App\Entity\TranslatableInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -22,7 +21,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ApiResource(
     denormalizationContext: ['groups' => ['translation']],
 )]
-class AirlineTranslations implements TranslatableInterface
+class AirlineTranslations
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
