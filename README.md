@@ -19,7 +19,9 @@
    ```
 3. Configurez le fichier `.env` :
    Configurez les informations de connexion à la base de données.
+   ```bash
    DATABASE_URL="postgresql://username:password@127.0.0.1:5432/nom_de_la_base"
+   ```
 
 4. Création de la base de donnée :
    ```bash
