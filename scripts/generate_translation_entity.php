@@ -21,26 +21,39 @@ namespace $namespace;
 use ApiPlatform\Metadata\ApiResource;
 use $repositoryNamespace\\{$entityName}Repository;
 use Doctrine\DBAL\Types\Types;
-use $interfaceNamespace;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: {$entityName}Repository::class)]
-#[ApiResource]
-class $entityName implements TranslatableInterface
+#[ORM\Table(name: '$tableName', uniqueConstraints: [
+    new ORM\UniqueConstraint(name: 'unique_code_category', columns: ['code', 'category'])
+])]
+#[UniqueEntity(
+    fields: ['code', 'category'],
+    message: 'This code and category combination already exists.'
+)]
+#[ApiResource(
+    denormalizationContext: ['groups' => ['translation']],
+)]
+class $entityName
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int \$id = null;
 
-    #[ORM\Column(length: 10)]
+    #[ORM\Column(length: 50)]
+    #[Groups("translation")]
     private ?string \$code = null;
     
     #[ORM\Column(length: 50)]
+    #[Groups("translation")]
     private ?string \$category = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("translation")]
     private ?string \$description = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
@@ -48,6 +61,11 @@ class $entityName implements TranslatableInterface
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface \$updatedAt = null;
+
+    public function __construct()
+    {
+        \$this->createdAt = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
@@ -90,9 +108,11 @@ class $entityName implements TranslatableInterface
         return \$this;
     }
 
-    public function setDescription(?string \$description): void
+    public function setDescription(?string \$description): static
     {
         \$this->description = \$description;
+
+        return \$this;
     }
 
     public function getCreatedAt(): ?\DateTimeInterface
